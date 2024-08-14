@@ -5,13 +5,13 @@ import { ClerkProvider } from '@clerk/nextjs';
 
 import LeftSideBar from '@/components/layout/LeftSideBar';
 import TopBar from '@/components/layout/TopBar';
-// import { ToasterProvider } from '@/lib/ToasterProvider';
+import ToasterProvider from '@/lib/ToasterProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Borcelle - Admin Dashboard',
-    description: "Admin dashboard to manage Borcelle's data",
+    title: 'Kztudioz - Admin Dashboard',
+    description: 'Admin dashboard to manage Kztudioz data',
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
         <ClerkProvider>
             <html lang='en'>
                 <body className={inter.className}>
-                    {/* <ToasterProvider /> */}
+                    <ToasterProvider />
                     <div className='flex max-lg:flex-col text-grey-1'>
                         <LeftSideBar />
                         <TopBar />
