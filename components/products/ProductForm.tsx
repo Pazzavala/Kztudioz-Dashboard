@@ -174,14 +174,20 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                         <FormControl>
                            <ImageUpload
                               value={field.value}
-                              onChange={(url) =>
-                                 field.onChange([...field.value, url])
-                              }
-                              onRemove={(url) =>
-                                 field.onChange([
-                                    ...field.value.filter((image) => image !== url),
-                                 ])
-                              }
+                              onChange={(urls) => {
+                                 field.onChange(urls);
+                                 // Force a re-render of the form
+                                 form.trigger('media');
+                              }}
+                              onRemove={(url) => {
+                                 const newUrls = field.value.filter(
+                                    (image) => image !== url
+                                 );
+
+                                 field.onChange(newUrls);
+                                 // Force a re-render of the form
+                                 form.trigger('media');
+                              }}
                            />
                         </FormControl>
                         <FormMessage className='text-red-1' />
