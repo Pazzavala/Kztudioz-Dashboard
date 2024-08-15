@@ -1,64 +1,30 @@
-// Importing the mongoose library to work with MongoDB
 import mongoose from 'mongoose';
-import { number } from 'zod';
 
-// Defining our Schema - Outline of our model
-// The schema defines the structure of documents in the 'Collection' collection in MongoDB
-const productSchema = new mongoose.Schema(
-    {
-        // 'title' field is of type String, required, and must be unique
-        title: {
-            type: String,
-            require: true, // This field must have a value (required)
-            unique: true, // Ensures that no two documents can have the same 'title'
-        },
-        // 'description' field is of type String and is optional
-        description: String,
-        // 'image' field is of type String and is required
-        media: {
-            type: [String],
-            require: true, // This field must have a value (required)
-        },
-        category: {
-            type: [String],
-            require: true, // This field must have a value (required)
-        },
-        collection: {
-            type: [
-                { type: mongoose.Schema.Types.ObjectId, ref: 'Collections' },
-            ],
-        },
-        tags: [String],
-        sizes: [String],
-        colors: [String],
-        price: {
-            type: mongoose.Schema.Types.Decimal128,
-            get: (v: mongoose.Schema.Types.Decimal128) => {
-                return parseFloat(v.toString());
-            },
-        },
-        expense: {
-            type: mongoose.Schema.Types.Decimal128,
-            get: (v: mongoose.Schema.Types.Decimal128) => {
-                return parseFloat(v.toString());
-            },
-        },
-        // 'createdAt' field stores the date and time when the document is created
-        createdAt: {
-            type: Date, // Specifies the type as Date
-            default: Date.now, // Sets the default value to the current date and time
-        },
-        // 'updatedAt' field stores the date and time when the document is last updated
-        updatedAt: {
-            type: Date, // Specifies the type as Date
-            default: Date.now, // Sets the default value to the current date and time
-        },
-    },
-    { toJSON: { getters: true } }
+const ProductSchema = new mongoose.Schema(
+   {
+      title: String,
+      description: String,
+      media: [String],
+      collections: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Collection' }],
+      tags: [String],
+      price: {
+         type: mongoose.Schema.Types.Decimal128,
+         get: (v: mongoose.Schema.Types.Decimal128) => {
+            return parseFloat(v.toString());
+         },
+      },
+      expense: {
+         type: mongoose.Schema.Types.Decimal128,
+         get: (v: mongoose.Schema.Types.Decimal128) => {
+            return parseFloat(v.toString());
+         },
+      },
+      createdAt: { type: Date, default: Date.now },
+      updatedAt: { type: Date, default: Date.now },
+   },
+   { toJSON: { getters: true } }
 );
 
-// Exporting the Collection model
-// If a model named 'Collection' already exists, we reuse it; otherwise, we create a new model using the 'collectionSchema'
-export const Product =
-    mongoose.models.Product || // Checks if the model already exists
-    mongoose.model('Product', productSchema); // Creates a new model if it doesn't exist
+const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
+
+export default Product;
