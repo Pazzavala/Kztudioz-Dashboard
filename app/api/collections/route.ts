@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
       await connectToDB();
 
       // Parse the incoming request body to extract title, description, and image
-      const { title, description, image } = await req.json();
+      const { title, description, media } = await req.json();
 
       // Check if a collection with the same title already exists
       const existingCollection = await Collection.findOne({ title });
@@ -35,7 +35,7 @@ export const POST = async (req: NextRequest) => {
       }
 
       // Ensure that both title and image are provided, otherwise return a 400 Bad Request response
-      if (!title || !image) {
+      if (!title || !media) {
          return new NextResponse('Title and image required', {
             status: 400,
          });
@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest) => {
       const newCollection = await Collection.create({
          title,
          description,
-         image,
+         media,
       });
 
       // Save the newly created collection to the database

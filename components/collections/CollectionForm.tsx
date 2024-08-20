@@ -25,7 +25,7 @@ import Delete from '../custom ui/Delete';
 const formSchema = z.object({
    title: z.string().min(2).max(20),
    description: z.string().min(2).max(500).trim(),
-   image: z.string(),
+   media: z.array(z.string()),
 });
 
 interface CollectionFormProps {
@@ -44,7 +44,7 @@ export default function CollectionForm({ initialData }: CollectionFormProps) {
          : {
               title: '',
               description: '',
-              image: '',
+              media: [],
            },
    });
 
@@ -130,18 +130,30 @@ export default function CollectionForm({ initialData }: CollectionFormProps) {
                />
                <FormField
                   control={form.control}
-                  name='image'
+                  name='media'
                   render={({ field }) => (
                      <FormItem>
                         <FormLabel>Image</FormLabel>
                         <FormControl>
                            <ImageUpload
-                              value={field.value ? [field.value] : []}
-                              onChange={(url) => field.onChange(url)}
-                              onRemove={() => field.onChange('')}
+                              value={field.value}
+                              onChange={(urls) => {
+                                 field.onChange(urls);
+                                 // Force a re-render of the form
+                                 form.trigger('media');
+                              }}
+                              onRemove={(url) => {
+                                 const newUrls = field.value.filter(
+                                    (image) => image !== url
+                                 );
+
+                                 field.onChange(newUrls);
+                                 // Force a re-render of the form
+                                 form.trigger('media');
+                              }}
                            />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className='text-red-1' />
                      </FormItem>
                   )}
                />

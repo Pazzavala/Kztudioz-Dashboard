@@ -7,10 +7,7 @@ const collectionSchema = new mongoose.Schema({
       unique: true,
    },
    description: String,
-   image: {
-      type: String,
-      required: true,
-   },
+   media: [String],
    products: [
       {
          type: mongoose.Schema.Types.ObjectId,
