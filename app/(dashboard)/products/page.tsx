@@ -52,3 +52,5 @@ export default function Products() {
       </div>
    );
 }
+
+export const dynamic = 'force-dynamic';

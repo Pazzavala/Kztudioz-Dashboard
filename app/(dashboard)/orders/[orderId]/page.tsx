@@ -63,3 +63,5 @@ export default async function OrderDetails({
       </div>
    );
 }
+
+export const dynamic = 'force-dynamic';

@@ -12,7 +12,7 @@ export const GET = async (
       const searchedProducts = await Product.find({
          $or: [
             { title: { $regex: params.query, $options: 'i' } },
-            // { collection: { $in: [new RegExp(params.query, 'i')] } },
+            // { collection: { $in: params.query } },
             { tags: { $in: [new RegExp(params.query, 'i')] } }, // $in is used to match an array of values
          ],
       });
@@ -23,3 +23,5 @@ export const GET = async (
       return new NextResponse('Internal Server Error', { status: 500 });
    }
 };
+
+export const dynamic = 'force-dynamic';
