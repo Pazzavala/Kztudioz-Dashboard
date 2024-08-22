@@ -75,5 +75,3 @@ export default async function OrderDetails({
       );
    }
 }
-
-export const dynamic = 'force-dynamic';

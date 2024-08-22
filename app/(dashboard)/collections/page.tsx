@@ -50,5 +50,3 @@ export default function Collections() {
       </div>
    );
 }
-
-export const dynamic = 'force-dynamic';
