@@ -25,6 +25,14 @@ export default async function OrderDetails({
 
    const { street, city, state, postalCode, country } = orderDetails.shippingAddress;
 
+   const shippingRateMapping: { [key: string]: string } = {
+      shr_1PqJ1VKn0cNBHMkihBBCHJ0X: 'USPS Shipping (1-5 days, Untracked)',
+      shr_1PqIyeKn0cNBHMkifsmGQJ1M: 'FedEx Express Shipping (1-3 days, Tracked)',
+      shr_1PqIy9Kn0cNBHMkiJSX1TeON: 'FedEx Ground Shipping (1-5 days, Tracked)',
+   };
+
+   const shippingType = shippingRateMapping[orderDetails.shippingRate];
+
    return (
       <div className='flex flex-col p-10 gap-5'>
          <p className='text-base-bold'>
@@ -45,7 +53,7 @@ export default async function OrderDetails({
          </p>
          <p className='text-base-bold'>
             Shipping rate ID:{' '}
-            <span className='text-base-medium'>{orderDetails.shippingRate}</span>
+            <span className='text-base-medium'>{shippingType}</span>
          </p>
          <DataTable
             columns={columns}
