@@ -8,7 +8,7 @@ import React from 'react';
 export default async function Customers() {
    await connectToDB();
 
-   const customer = await Customer.find().sort({ createdAt: 'desc' }); // -1 also works
+   const customer = await Customer.find().sort({ createdAt: -1 }); // 'desc' also works
 
    return (
       <div className='px-10 py-5'>

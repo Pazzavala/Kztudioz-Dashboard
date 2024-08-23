@@ -58,7 +58,7 @@ export const GET = async (req: NextRequest) => {
       await connectToDB();
 
       const products = await Product.find()
-         .sort({ createdAt: 'desc' })
+         .sort({ createdAt: -1 })
          .populate({ path: 'collections', model: Collection });
 
       return NextResponse.json(products, { status: 200 });

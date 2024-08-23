@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest) => {
    try {
       await connectToDB();
 
-      const orders = await Order.find().sort({ createdAt: 'desc' });
+      const orders = await Order.find().sort({ createdAt: -1 });
 
       const orderDetails = await Promise.all(
          orders.map(async (order) => {
