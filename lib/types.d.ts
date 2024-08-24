@@ -1,9 +1,16 @@
+type OrderItemType = {
+  product: ProductType;
+  quantity: number;
+};
+
 type CollectionType = {
   _id: string;
   title: string;
   description: string;
   media: [string];
-  products: ProductType[];
+  //   products: ProductType[];
+  product: ProductType;
+  quantity: number;
 };
 
 type ProductType = {
@@ -17,11 +24,6 @@ type ProductType = {
   expense: number;
   createdAt: Date;
   UpdatedAt: Date;
-};
-
-type OrderItemType = {
-  product: ProductType;
-  quantity: number;
 };
 
 type CustomerType = {

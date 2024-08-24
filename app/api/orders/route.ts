@@ -5,6 +5,8 @@ import { connectToDB } from '@/lib/mongoDB';
 import { NextRequest, NextResponse } from 'next/server';
 import { format } from 'date-fns';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (req: NextRequest) => {
   try {
     await connectToDB();
@@ -32,5 +34,3 @@ export const GET = async (req: NextRequest) => {
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 };
-
-export const dynamic = 'force-dynamic';
