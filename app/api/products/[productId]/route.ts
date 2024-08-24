@@ -1,9 +1,10 @@
+import { NextRequest, NextResponse } from 'next/server';
 import Collection from '@/lib/models/Collection';
 import Product from '@/lib/models/Product';
 import { connectToDB } from '@/lib/mongoDB';
 import { auth } from '@clerk/nextjs/server';
 
-import { NextRequest, NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 
 export const GET = async (
    req: NextRequest,
@@ -52,9 +53,7 @@ export const POST = async (
       const product = await Product.findById(params.productId);
 
       if (!product) {
-         return new NextResponse(JSON.stringify({ message: 'Product not found' }), {
-            status: 404,
-         });
+         return new NextResponse('Product not found', { status: 404 });
       }
 
       const { title, description, media, collections, tags, price, expense } =
@@ -157,5 +156,3 @@ export const DELETE = async (
       return new NextResponse('Internal error', { status: 500 });
    }
 };
-
-export const dynamic = 'force-dynamic';
