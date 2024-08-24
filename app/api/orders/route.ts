@@ -6,31 +6,31 @@ import { NextRequest, NextResponse } from 'next/server';
 import { format } from 'date-fns';
 
 export const GET = async (req: NextRequest) => {
-   try {
-      await connectToDB();
+  try {
+    await connectToDB();
 
-      const orders = await Order.find().sort({ createdAt: -1 });
+    const orders = await Order.find().sort({ createdAt: -1 });
 
-      const orderDetails = await Promise.all(
-         orders.map(async (order) => {
-            const customer = await Customer.findOne({
-               clerkId: order.customerClerkId,
-            });
-            return {
-               _id: order._id,
-               customer: customer.name,
-               products: order.products.length,
-               totalAmount: order.totalAmount,
-               createdAt: format(order.createdAt, 'MMM dd, yyyy'),
-            };
-         })
-      );
+    const orderDetails = await Promise.all(
+      orders.map(async (order: any) => {
+        const customer = await Customer.findOne({
+          clerkId: order.customerClerkId,
+        });
+        return {
+          _id: order._id,
+          customer: customer.name,
+          products: order.products.length,
+          totalAmount: order.totalAmount,
+          createdAt: format(order.createdAt, 'MMM dd, yyyy'),
+        };
+      })
+    );
 
-      return NextResponse.json(orderDetails, { status: 200 });
-   } catch (err) {
-      console.log('[orders_GET]', err);
-      return new NextResponse('Internal Server Error', { status: 500 });
-   }
+    return NextResponse.json(orderDetails, { status: 200 });
+  } catch (err) {
+    console.log('[orders_GET]', err);
+    return new NextResponse('Internal Server Error', { status: 500 });
+  }
 };
 
 export const dynamic = 'force-dynamic';
