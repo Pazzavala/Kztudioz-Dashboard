@@ -15,7 +15,7 @@ export const GET = async (
     await connectToDB();
 
     const collection = await Collection.findById(params.collectionId).populate({
-      path: 'products.product',
+      path: 'products',
       model: Product,
     });
 

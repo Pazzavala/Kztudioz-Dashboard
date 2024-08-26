@@ -8,8 +8,8 @@ type CollectionType = {
   title: string;
   description: string;
   media: [string];
-  //   products: ProductType[];
-  product: ProductType;
+  products: ProductType[];
+  // product: ProductType;
   quantity: number;
 };
 

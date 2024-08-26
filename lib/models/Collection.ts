@@ -10,11 +10,8 @@ const collectionSchema = new mongoose.Schema({
   media: [String],
   products: [
     {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-      },
-      quantity: Number,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
     },
   ],
   createdAt: {
