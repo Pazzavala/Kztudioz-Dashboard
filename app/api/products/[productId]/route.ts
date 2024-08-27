@@ -29,7 +29,7 @@ export const GET = async (
     return new NextResponse(JSON.stringify(product), {
       status: 200,
       headers: {
-        'Access-Control-Allow-Origin': `${process.env.ECOMMERCE_STORE_URL}`,
+        'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_STORE_URL}`,
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
