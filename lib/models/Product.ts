@@ -9,8 +9,9 @@ const ProductSchema = new mongoose.Schema(
       tags: [String],
       price: {
          type: mongoose.Schema.Types.Decimal128,
-         get: (v: mongoose.Schema.Types.Decimal128 | null) =>
-            v ? v.toString() : null,
+         get: (v: mongoose.Schema.Types.Decimal128) => {
+            return parseFloat(v.toString());
+         },
       },
       expense: {
          type: mongoose.Schema.Types.Decimal128,
