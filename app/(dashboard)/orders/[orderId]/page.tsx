@@ -26,9 +26,10 @@ export default async function OrderDetails({
          orderDetails.shippingAddress;
 
       const shippingRateMapping: { [key: string]: string } = {
-         shr_1PqJ1VKn0cNBHMkihBBCHJ0X: 'USPS Shipping (1-5 days, Untracked)',
-         shr_1PqIyeKn0cNBHMkifsmGQJ1M: 'FedEx Express Shipping (1-3 days, Tracked)',
-         shr_1PqIy9Kn0cNBHMkiJSX1TeON: 'FedEx Ground Shipping (1-5 days, Tracked)',
+         // shr_1PqJ1VKn0cNBHMkihBBCHJ0X: 'USPS First-Class Mail (1-5 days, Untracked)',
+         shr_1QQcPuC1X2HSWsRLfPrdgqW0: 'USPS First-Class Mail (1-5 days, Untracked)',
+         shr_1QQcT4C1X2HSWsRLqrQFZWoQ: 'USPS Priority Mail (1-3 days, Tracked)',
+         // shr_1PqIy9Kn0cNBHMkiJSX1TeON: 'FedEx Ground Shipping (1-5 days, Tracked)',
       };
 
       const shippingType = shippingRateMapping[orderDetails.shippingRate];
